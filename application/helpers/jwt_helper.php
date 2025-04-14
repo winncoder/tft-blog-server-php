@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
+
 if (!function_exists('jwt_encode')) {
     function jwt_encode($data) {
         $CI =& get_instance();
@@ -15,12 +16,15 @@ if (!function_exists('jwt_encode')) {
             'aud'  => $CI->config->item('jwt_audience'),
             'iat'  => $now,
             'exp'  => $exp,
-            'data' => $data
-        ];
+            'data' => [
+                'id'    => $data['id'],  // Example: User ID
+                'username'   => $data['username'], // Example: Username
+                'email' => $data['email'],
+                ]
+            ];
         return JWT::encode($payload, $CI->config->item('jwt_key'), 'HS256');
     }
 }
-
 if (!function_exists('jwt_decode')) {
     function jwt_decode($token) {
         $CI =& get_instance();

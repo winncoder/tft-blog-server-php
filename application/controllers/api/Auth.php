@@ -37,7 +37,12 @@ class Auth extends CI_Controller {
             show_error('Invalid credentials', 401);
         }
         // issue JWT
-        $token = jwt_encode(['id'=>$user->id,'email'=>$user->email]);
+        $token = jwt_encode([
+            'id'       => $user->id,
+            'username' => $user->username,  // Ensure the 'username' exists in the user data
+            'email'    => $user->email
+        ]);
+        
         echo json_encode(['token'=>$token]);
     }
 }
