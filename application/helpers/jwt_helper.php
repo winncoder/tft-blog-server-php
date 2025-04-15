@@ -17,8 +17,8 @@ if (!function_exists('jwt_encode')) {
             'iat'  => $now,
             'exp'  => $exp,
             'data' => [
-                'id'    => $data['id'],  // Example: User ID
-                'username'   => $data['username'], // Example: Username
+                'id'    => $data['id'],
+                'username'   => $data['username'],
                 'email' => $data['email'],
                 ]
             ];
